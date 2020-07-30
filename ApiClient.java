@@ -255,7 +255,7 @@ public class ApiClient {
 
 		Request.Builder requestBuilder = new Request.Builder().url(url);
 		if ("POST".equals(method)) {
-			requestBuilder.post(RequestBody.create(jsonBody.getBytes(StandardCharsets.UTF_8), JSON));
+			requestBuilder.post(RequestBody.create(JSON, jsonBody));
 		}
 
 		final String timestamp = String.valueOf(System.currentTimeMillis());
@@ -418,5 +418,11 @@ public class ApiClient {
 		public String data;
 		public String message;
 
+	}
+
+	public static void main(String args[]){
+		ApiClient apiClient = ApiClient.Builder.builder("https://XXXXXX").apiKey("xxx","xxx").build();
+		String response = apiClient.get(String.class,"/v1/market/fex", null);
+		System.out.println(response);
 	}
 }
